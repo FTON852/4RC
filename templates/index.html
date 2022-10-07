@@ -1,0 +1,6 @@
+ {% if request.user.is_authenticated %}
+    {{ request.user.username }}
+        <a class="btn btn-outline-primary" href="{% url 'account_logout' %}">Выход</a>
+    {% else %}
+        <a class="btn btn-outline-primary" href="{% url 'account_login' %}">Вход</a>
+    {% endif %}
