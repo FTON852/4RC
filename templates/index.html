@@ -1,6 +1,13 @@
- {% if request.user.is_authenticated %}
-    {{ request.user.username }}
-        <a class="btn btn-outline-primary" href="{% url 'account_logout' %}">Выход</a>
-    {% else %}
-        <a class="btn btn-outline-primary" href="{% url 'account_login' %}">Вход</a>
-    {% endif %}
+{% extends "base.html" %}
+{% block title %} Профиль {% endblock %}
+
+{% block body %}
+    <h1>Баланс: 4300</h1><br>
+
+    <div>Карусель с NFT</div><br>
+
+    <div><a href="{% url 'core:item_list' %}">Потратить</a></div>
+    <div><a href="">Отправить</a></div>
+    <div><a href="">История</a></div>
+    <div><a href="">Список</a></div>
+{% endblock %}
