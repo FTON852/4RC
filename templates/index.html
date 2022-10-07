@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Профиль {% endblock %}
+{% block title %} Главная {% endblock %}
 
 {% block body %}
     <h1>Баланс: 4300</h1><br>
@@ -7,7 +7,6 @@
     <div>Карусель с NFT</div><br>
 
     <div><a href="{% url 'core:item_list' %}">Потратить</a></div>
-    <div><a href="">Отправить</a></div>
-    <div><a href="">История</a></div>
-    <div><a href="">Список</a></div>
+    <div><a href="{% url 'main:profile' %}">История</a></div>
+    <div><a href="{% url 'main:people_list' %}">Список коллег</a></div>
 {% endblock %}
