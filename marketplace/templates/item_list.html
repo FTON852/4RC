@@ -1,0 +1,20 @@
+{% if messages %}
+    {% for message in messages %}
+        {{ message }}
+    {% endfor %}
+{% endif %}
+
+{% for item in items %}
+    {{ item.title }}
+    {{ item.description }}
+    {{ item.price }}
+    {{ item.name }}
+    <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>
+{% endfor %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Конвертировать</button>
+
+</form>
