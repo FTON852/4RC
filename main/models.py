@@ -3,6 +3,9 @@ from django.db import models
 
 
 # Create your models here.
+from django.urls import reverse
+
+
 class Wallet(models.Model):
     secret_key = models.CharField(max_length=100)
     public_key = models.CharField(max_length=100)
@@ -14,3 +17,6 @@ class Account(models.Model):
     icon = models.ImageField(blank=True, default='icon.jpg')
     status = models.BooleanField()
     wallet = models.ForeignKey(Wallet, related_name='wallet', on_delete=models.CASCADE)
+
+    def get_absolute_url(self):
+        return reverse('main:profile', kwargs={"pk": self.id})

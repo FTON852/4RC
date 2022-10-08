@@ -9,6 +9,9 @@
     {# TODO #}
     {#  if чужой профиль  #}
     {#  отправка NFT/моент  #}
+    {% if user.user.id != request.user.id  %}
+        <h1>отправка NFT</h1>
+    {% endif %}
     <div>История</div><br>
 
     <a href="{% url 'main:main-page' %}">Назад</a>

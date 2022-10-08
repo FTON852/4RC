@@ -4,8 +4,10 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import index, profile, people_list
 
+app_name = 'main'
+
 urlpatterns = [
     path('', index, name='main-page'),
-    path('profile/', profile, name='profile'),
+    path('profile/<int:pk>/', profile, name='profile'),
     path('people_list/', people_list, name='people_list'),
 ]
