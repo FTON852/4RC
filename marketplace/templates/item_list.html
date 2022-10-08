@@ -1,21 +1,111 @@
-{% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
+{#{% for item in items %}#}
+{#    <h2>{{ item.title }}</h2>#}
+{#    {{ item.description }}#}
+{#    {{ item.price }}#}
+{#    {{ item.name }}#}
+{#    <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>#}
+{#{% endfor %}#}
+{#<h2>Обмен на рубли</h2>#}
+{#<form method="post">#}
+{#    {% csrf_token %}#}
+{#    {{ form.as_p }}#}
+{#    <button type="submit">Конвертировать</button>#}
+{#    <br>#}
+{#</form>#}
+{#<a href="{% url 'main:main-page' %}">Назад</a>#}
+{% include 'base.html' %}
+{% load static %}
 
-{% for item in items %}
-    <h2>{{ item.title }}</h2>
-    {{ item.description }}
-    {{ item.price }}
-    {{ item.name }}
-    <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>
-{% endfor %}
-<h2>Обмен на рубли</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Конвертировать</button>
-    <br>
-</form>
-<a href="{% url 'main:main-page' %}">Назад</a>
+    <div class="row">
+        <div class="col-8">
+            <h1 style="padding-left:3rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;">Маркетплейс</h1>
+        </div>
+        <div class="col"><div style="margin-top: .5rem;
+                                    width: 3rem;
+                                    height: 3rem;
+                                    border-radius: 50%;
+                                    background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                                    margin-left: 3rem;">
+                                        <img src="{% static 'img/vtb.svg'%}" style="width: 2.5rem;
+                                                                    height: 2.5rem;
+                                                                    margin-left: 0.25rem;
+                                                                    margin-top: 0.25rem;">
+                                    </div>
+        </div>
+
+    <div class="row" style="margin-left: 0;
+                            margin-right: 0;">
+        {% for item in items %}
+        <div class="col">
+            <div style="width: 10rem;
+                        height: 15rem;
+                        border-radius: 20px;
+                        background: #D9D9D9;">
+                        <div class="row">
+                            <div class="col">
+                                <img src="{{ item.image.url }}" style="width: 10rem; height: 10rem;border-radius: 20px;">
+                            </div>
+                            <h6 style="text-align: center; margin-top: .5rem;">{{ item.price }}</h6>
+                            <h6 style="text-align: center; margin-top: .5rem;">{{ item.title }}</h6>
+                        </div>
+
+
+            </div>
+        </div>
+        {% endfor %}
+
+
+    </div>
+
+    <h4 style="padding-left:3rem; margin-bottom: 1rem; margin-top: 2rem;">Обмен на рубли</h4>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-1"></div>
+        <div class="col">
+            <h6  style="border-color: #1539F5;
+                        border-radius: 20px;
+                        border-width: 1.5px;
+                        border-style: solid;
+                        padding-top: .25rem;
+                        padding-bottom: .25rem;
+                        text-align: center;
+                        font-size: 1rem;">Курс обмена: 1 virtual rub = 1 real rub</h6>
+        </div>
+        <div class="col-1"></div>
+
+        </div>
+
+            <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <input type="text" name="amount" placeholder="Сумма" style="border-color: #1539F5;
+                        border-radius: 20px;
+                        border-width: 1.5px;
+                        border-style: solid;
+                        padding-top: .25rem;
+                        padding-bottom: .25rem;
+                        text-align: center;
+                        font-size: 1rem;
+                        width: 12rem;">
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+        <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        border-width: 0px;
+                        padding-top: .5rem;
+                        padding-bottom: .25rem;
+                        width: 12rem;">
+                        <h6 style="font-size: 1rem;
+                                    text-align: center;
+                                    color:  var(--bs-white);">Конвертировать</h6>
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>

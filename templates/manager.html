@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="row">
+        <div class="col-8">
+            <h1 style="padding-left:3rem;
+            margin-bottom: 1rem;
+            margin-top: 1rem;">Руководитель</h1>
+        </div>
+        <div class="col"><div style="margin-top: .5rem;
+                                    width: 3rem;
+                                    height: 3rem;
+                                    border-radius: 50%;
+                                    background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                                    margin-left: 3rem;">
+                                        <img src="./vtb.svg" style="width: 2.5rem;
+                                                                    height: 2.5rem;
+                                                                    margin-left: 0.25rem;
+                                                                    margin-top: 0.25rem;">
+                                    </div>
+        </div>
+
+
+    <h4 style="padding-left:3rem; margin-bottom: 1rem; margin-top: 2rem;">Отправить вознаграждение</h4>
+
+        <div class="row">
+        <div class="col" style="padding-left: 2rem; padding-right: 0rem;">
+            <ul class="gallery">
+                {% for user in users %}
+                <li><img id='User-1' src="{{ user.icon.url }}" wallet="{{ user.wallet.public_key }}" onclick="selectUser(this)" style="width: 5rem;
+                                                                                                        height: 5rem;
+                                                                                                        border-radius: 20px;">
+                    <h6 style="color: var(--bs-black); text-align: center;">{{ user.user.username }}</h6>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="selected-user" style="display: none;">
+        <div class="row" style="padding-right: 0rem;">
+            <div class="col-4"></div>
+            <div class="col">
+                <img id='User-5' src="./colleague.svg" style="width: 5rem; height: 5rem;border-radius: 20px; margin-left: 4vw;">
+                <h6 style="color: var(--bs-black); text-align: center;">User 5</h6>
+            </div>
+            <div class="col-4"></div>
+        </div>
+
+        <h4 style="padding-left:3rem;">Отправка монет</h4>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <input id="amount" type="text" name="amount"
+                    placeholder="Сумма"
+                    style="border-color: #1539F5;
+                        border-radius: 20px;
+                        border-width: 1.5px;
+                        border-style: solid;
+                        padding-top: .25rem;
+                        padding-bottom: .25rem;
+                        text-align: center;
+                        font-size: 1rem;
+                        width: 12rem;">
+        </div>
+        <div class="col-3"></div>
+
+        </div>
+            <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+            <div class="col-3"></div>
+            <div class="col">
+                <button type="button" name="send" onclick="sendMoney()"
+                            style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                            border-radius: 20px;
+                            border-width: 0px;
+                            padding-top: .5rem;
+                            padding-bottom: .25rem;
+                            width: 12rem;">
+                            <h6 style="font-size: 1rem;
+                                        text-align: center;
+                                        color:  var(--bs-white);">Отправить</h6>
+                </button>
+            </div>
+        <div class="col-3"></div>
+    </div>
+
+    </div>
+
+    <script type="text/javascript">
+        var wallet = null;
+        function selectUser(t) {
+            t = t.closest('li')
+            document.querySelector('.selected-user').style.display = null;
+            document.querySelector('.selected-user > div.row > div.col > img').src = t.querySelector('img').src;
+            document.querySelector('.selected-user > div.row > div.col > h6').textContent = t.querySelector('h6').textContent;
+            wallet = t.querySelector('img').getAttribute("wallet");
+        }
+
+        function sendMoney() {
+            var amount = document.querySelector('input#amount').value;
+            console.log(amount);
+            console.log(wallet);
+            var data = new FormData();
+            data.append('publicAddresReceiver', wallet);
+            data.append('amount', amount);
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', "", true);
+            xhr.onload = function () {
+                // do something to response
+                console.log(this.responseText);
+            };
+            xhr.send(data);
+        }
+
+
+    </script>
+{% endblock %}
