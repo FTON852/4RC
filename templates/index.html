@@ -2,9 +2,15 @@
 {% block title %} Главная {% endblock %}
 
 {% block body %}
-    <h1>Баланс: 4300</h1><br>
-
-    <div>Карусель с NFT</div><br>
+    <h1>Matic: {{ matic }}</h1>
+    <h1>Ruble: {{ ruble }}</h1>
+    <div>Карусель с NFT</div>
+    {% for nft in balance_nft %}
+        <div>
+            <img src="{{ nft.uri }}" alt="">
+            <span>{{ nft.amount }} штук</span>
+        </div>
+    {% endfor %}
 
     <div><a href="{% url 'core:item_list' %}">Потратить</a></div>
     <div><a href="{{ user.get_absolute_url }}">История</a></div>
