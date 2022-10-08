@@ -5,6 +5,8 @@ from django.db import models
 # Create your models here.
 from django.urls import reverse
 
+from main.models import Account
+
 
 class Item(models.Model):
     title = models.CharField(max_length=100)
@@ -12,6 +14,7 @@ class Item(models.Model):
     price = models.FloatField(default=0.0)
     description = models.TextField(max_length=2000)
     image = models.ImageField(default="default.png")
+    created_by = models.ForeignKey(Account, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('core:product', kwargs={"slug": self.slug})
