@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'main',
-    'marketplace'
+    'marketplace',
+    'eventfeed',
 ]
 
 MIDDLEWARE = [

@@ -4,18 +4,11 @@
     {% endfor %}
 {% endif %}
 
-{% for item in items %}
+{% for item in events %}
     <h2>{{ item.title }}</h2>
     {{ item.description }}
     {{ item.price }}
     {{ item.name }}
     <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>
-{% endfor %}
-<h2>Обмен на рубли</h2>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Конвертировать</button>
-    <br>
-</form>
+{% endfor %}<br>
 <a href="{% url 'main:main-page' %}">Назад</a>
