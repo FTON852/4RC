@@ -17,7 +17,8 @@ if __name__ == '__main__':
     transactionHash = network.send_ruble(new_public, 0.2)["transaction"]
     network.check_transaction(transactionHash)
 
-    transaction_hash = network.new_nft("", 2)["transaction_hash"]
+    transactionHash = network.new_nft("htt", 2)["transaction_hash"]
+    network.check_transaction(transactionHash)
     network.get_nft(529)
 
     transactionHash = network.send_nft(new_public, 529)["transaction_hash"]
