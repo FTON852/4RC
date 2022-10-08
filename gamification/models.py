@@ -12,3 +12,4 @@ class Achievement(models.Model):
 class Achievements(models.Model):
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     achieve = models.ForeignKey(Achievement, on_delete=models.CASCADE)
+    status = models.BooleanField(default=False)
