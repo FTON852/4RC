@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
 # Create your models here.
 from django.urls import reverse
 
@@ -17,6 +16,15 @@ class Account(models.Model):
     icon = models.ImageField(blank=True, default='icon.jpg')
     status = models.BooleanField()
     wallet = models.ForeignKey(Wallet, related_name='wallet', on_delete=models.CASCADE)
+    group = models.CharField(max_length=100)
 
     def get_absolute_url(self):
         return reverse('main:profile', kwargs={"pk": self.id})
+
+
+class MonthlyPay(models.Model):
+    group = models.CharField(max_length=100)
+    cost = models.FloatField()
+
+    def __str__(self):
+        return self.group + ' ' + str(self.cost)

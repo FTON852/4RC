@@ -1,10 +1,158 @@
 {% extends "base.html" %}
-{% block title %} Главная {% endblock %}
-
+{% load static %}
 {% block body %}
 
-    <div><a href="{% url 'core:item_list' %}">Потратить</a></div>
-    <div><a href="{{ user.get_absolute_url }}">История</a></div>
-    <div><a href="{% url 'main:people_list' %}">Список коллег</a></div>
-    <div><a href="{% url 'event_feed:event_list' %}">Список мероприятий</a></div>
+    <div class="row">
+        <div class="col-8">
+            <h1 style="font-size: 24px; padding-left:4rem; padding-top:1rem;">{{ request.user.username }}</h1>
+        </div>
+        <div class="col">
+            <div style="margin-top: .5rem;
+                                    width: 3rem;
+                                    height: 3rem;
+                                    border-radius: 50%;
+                                    background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                                    margin-left: 3rem;">
+                <img src="{% static 'img/vtb.svg' %}" style="width: 2.5rem;
+                                                                    height: 2.5rem;
+                                                                    margin-left: 0.25rem;
+                                                                    margin-top: 0.25rem;">
+            </div>
+        </div>
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col">
+                <div style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);border-radius: 20px;padding-top: 10px;padding-bottom: 10px;">
+                    <h6 style="color: var(--bs-white);text-align: center;">Баланс</h6>
+                    <h3 style="color: var(--bs-white);text-align: center;">{{ ruble }}<br></h3>
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row">
+            <div class="col" style="padding-left: 2rem;">
+                <ul class="gallery">
+                    {% for nft in balance_nft %}
+                        <li><img src="{{ nft.uri }}" style="width: 5rem; height: 5rem;border-radius: 20px;">
+                            <h6 style="color: var(--bs-black); text-align: center;">{{ nft.amount }} Сертификата</h6>
+                        </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col" onclick="location.href = '{% url 'core:item_list' %}'">
+                <div style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;">
+                    <h6 style="color: var(--bs-white);
+                            text-align: center;
+                            font-size: 1rem;
+                            margin-left: 1rem;
+                            margin-right: 1rem;">
+                        Обменяйте NFT или монеты на товары в маркетплейсе или на реальные рубли
+                    </h6>
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 style="color: var(--bs-white);text-align: right;">Потратить<br></h3>
+                        </div>
+                        <div class="col-1">
+                            <img src="{% static 'img/shopping bag.svg' %}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col" onclick="location.href = '{{ user.get_absolute_url }}'">
+                <div style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;">
+                    <h6 style="color: var(--bs-white);
+                            text-align: center;
+                            font-size: 1rem;
+                            margin-left: 1rem;
+                            margin-right: 1rem;">
+                        Посмотрите историю начислений/списаний ваших NFT и монет
+                    </h6>
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 style="color: var(--bs-white);text-align: right;">История<br></h3>
+                        </div>
+                        <div class="col-1">
+                            <img src="{% static 'img/agenda.svg' %}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col" onclick="location.href = '{% url 'main:people_list' %}'">
+                <div style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;">
+                    <h6 style="color: var(--bs-white);
+                            text-align: center;
+                            font-size: 1rem;
+                            margin-left: 1rem;
+                            margin-right: 1rem;">
+                        Посетите страницы ваших коллег, узнайте какие у них появились новые NFT-сертификаты
+                    </h6>
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 style="color: var(--bs-white);text-align: right;">Список<br></h3>
+                        </div>
+                        <div class="col-1">
+                            <img src="{% static 'img/users.svg' %}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col" onclick="location.href = '{% url 'event_feed:event_list' %}'">
+                <div style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        padding-top: 10px;
+                        padding-bottom: 10px;">
+                    <h6 style="color: var(--bs-white);
+                            text-align: center;
+                            font-size: 1rem;
+                            margin-left: 1rem;
+                            margin-right: 1rem;">
+                        Посетите мероприятия для получения NFT-сертификаты
+                    </h6>
+                    <div class="row">
+                        <div class="col-8">
+                            <h3 style="color: var(--bs-white);text-align: right;">Список мероприятий<br></h3>
+                        </div>
+                        <div class="col-1">
+                            <img src="{% static 'img/users.svg' %}">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1"></div>
+        </div>
+
 {% endblock %}
