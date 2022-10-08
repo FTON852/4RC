@@ -2,16 +2,21 @@
 {% block title %} Профиль {% endblock %}
 
 {% block body %}
-    <h1>Баланс: 4300</h1><br>
-
-    <div>Карусель с NFT</div><br>
-
+    <h1>Matic: {{ matic }}</h1>
+    <h1>Ruble: {{ ruble }}</h1>
+    <div>Карусель с NFT</div>
+    {% for nft in balance_nft %}
+        <div>
+            <img src="{{ nft.uri }}" alt="" style="width: 20%">
+            <span>{{ nft.amount }} штук</span>
+        </div>
+    {% endfor %}
     {# TODO #}
     {#  if чужой профиль  #}
     {#  отправка NFT/моент  #}
     {% if user.user.id != request.user.id %}
         <form method="post">
-            <h2>Отправка монет</h2>
+            <h2>Отправка Ruble монет</h2>
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Отправить</button>
