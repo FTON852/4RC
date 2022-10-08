@@ -1,14 +1,57 @@
-{% if messages %}
-    {% for message in messages %}
-        {{ message }}
-    {% endfor %}
-{% endif %}
+{#{% if messages %}#}
+{#    {% for message in messages %}#}
+{#        {{ message }}#}
+{#    {% endfor %}#}
+{#{% endif %}#}
+{##}
+{#{% for item in events %}#}
+{#    <h2>{{ item.title }}</h2>#}
+{#    {{ item.description }}#}
+{#    {{ item.price }}#}
+{#    {{ item.name }}#}
+{#    <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>#}
+{#{% endfor %}<br>#}
+{#<a href="{% url 'main:main-page' %}">Назад</a>#}
 
-{% for item in events %}
-    <h2>{{ item.title }}</h2>
-    {{ item.description }}
-    {{ item.price }}
-    {{ item.name }}
-    <a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a>
-{% endfor %}<br>
-<a href="{% url 'main:main-page' %}">Назад</a>
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="row">
+        <div class="col-8">
+            <h1 style="font-size: 24px; padding-left:4rem; padding-top:1rem;">{{ request.user.username }}</h1>
+        </div>
+        <div class="col">
+            <div style="margin-top: .5rem;
+                                    width: 3rem;
+                                    height: 3rem;
+                                    border-radius: 50%;
+                                    background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                                    margin-left: 3rem;">
+                <img src="{% static 'img/vtb.svg' %}" style="width: 2.5rem;
+                                                                    height: 2.5rem;
+                                                                    margin-left: 0.25rem;
+                                                                    margin-top: 0.25rem;">
+            </div>
+        </div>
+
+        <h4 style="padding-left:3rem; margin-top: 2rem;">Мероприятия</h4>
+
+
+
+        {% for item in events %}
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+            <div class="col-1"></div>
+            <div class="col">
+
+                <img src="{{ item.image.url }}" class="img-fluid" style="border-color: #1539F5;
+                        border-radius: 20px;
+                        border-width: 1.5px;
+                        width: 80vw;
+                        height: 20vh;">
+                <h4 style="text-align: center; margin-top:1rem;"> {{ item.title }}</h4>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    {% endfor %}
+{% endblock %}

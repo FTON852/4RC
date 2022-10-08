@@ -9,7 +9,7 @@ urlpatterns = [
     path('market/', include('marketplace.urls'), name='market'),
     path('accounts/', include('allauth.urls')),
     path('feed/', include('eventfeed.urls')),
-    path('tasks/', include('gamification.urls')),
+    path('tasks/', include(('gamification.urls', 'gamification'), namespace='gamification')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

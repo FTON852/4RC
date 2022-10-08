@@ -20,7 +20,8 @@ class Account(models.Model):
 
     def get_absolute_url(self):
         return reverse('main:profile', kwargs={"pk": self.id})
-
+    def __str__(self):
+        return self.user.username
 
 class MonthlyPay(models.Model):
     group = models.CharField(max_length=100)

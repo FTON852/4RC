@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import ShowTasks
 
-app_name = 'main'
+app_name = 'game'
 
 urlpatterns = [
     path('', ShowTasks.as_view(), name='tasks'),
