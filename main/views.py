@@ -1,13 +1,29 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Account
+from api.network import Core
 
 
 # Create your views here.
 @login_required
 def index(request):
     user = Account.objects.get(user_id=request.user.id)
-    return render(request, 'index.html', {'user': user})
+    core = Core(user.wallet.public_key, user.wallet.secret_key)
+    balance = core.balance
+    balance_nft = core.balance_nft
+    nfts = []
+    for nft in balance_nft["balance"]:
+        nfts.append({
+            "amount": len(nft["tokens"]),
+            "uri": nft["uri"]
+        })
+    return render(request, 'index.html',
+                  {
+                      'user': user,
+                      'matic': balance["maticAmount"],
+                      'ruble': balance["coinsAmount"],
+                      "balance_nft": nfts
+                  })
 
 
 @login_required
