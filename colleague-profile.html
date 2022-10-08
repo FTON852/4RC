@@ -12,7 +12,7 @@
 <body style="overflow-x:hidden;">
     <div class="row">
         <div class="col-8">
-            <h1 style="font-size: 24px; padding-left:4rem; padding-top:1rem;">Коллега</h1>
+            <h1 id="colleagueName" wallet="5" style="font-size: 24px; padding-left:4rem; padding-top:1rem;">Коллега</h1>
         </div>
         <div class="col"><div style="margin-top: .5rem;
                                     width: 3rem;
@@ -68,7 +68,7 @@
     <div class="row" style="padding-top: 1rem; margin-left:0rem;">
         <div class="col-3"></div>
         <div class="col">
-            <input type="text" name="amount" placeholder="Сумма" style="border-color: #1539F5;
+            <input type="text" name="amount" placeholder="Сумма" id="amount" style="border-color: #1539F5;
                         border-radius: 20px;
                         border-width: 1.5px;
                         border-style: solid;
@@ -84,7 +84,8 @@
         <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
         <div class="col-3"></div>
         <div class="col">
-            <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+            <button type="button" name="send" onclick="sendMoney()"
+                    style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                         border-radius: 20px;
                         border-width: 0px;
                         padding-top: .5rem;
@@ -103,7 +104,7 @@
         <div class="row">
         <div class="col" style="padding-left: 2rem;">
             <ul class="gallery">
-                <li><img src="./nft-sample.png" style="width: 5rem; height: 5rem;border-radius: 20px;">
+                <li><img src="./nft-sample.png" tokenId="111" onclick="selectNft(this)" style="width: 5rem; height: 5rem;border-radius: 20px;">
                     <h6 style="color: var(--bs-black); text-align: center;">NFT</h6>
                 </li>
 
@@ -129,12 +130,14 @@
     <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
         <div class="col-3"></div>
         <div class="col">
-            <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+            <button type="button" name="send" id="sendNftButton" onclick="sendNft()" 
+                    style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                         border-radius: 20px;
                         border-width: 0px;
                         padding-top: .5rem;
                         padding-bottom: .25rem;
-                        width: 12rem;">
+                        width: 12rem;
+                        display: none;">
                         <h6 style="font-size: 1rem;
                                     text-align: center;
                                     color:  var(--bs-white);">Отправить</h6>
@@ -180,8 +183,62 @@
         <div class="col-1"></div>
     </div>
 
+    <div style="position: fixed;
+                          bottom: 1vh;
+                          right: -85vw;">
+        <a>
+            <img onclick="window.history.back()" src="./back-button.svg" style="color: white;
+                                          padding: 0rem;
+                                          border-radius: 4px;
+                                          border-color: #46b8da;
+                                          box-shadow: 2px 2px 40px -9px rgba(34, 60, 80, 0.5);">
+        </a>
+    </div>
 
-    
+
+    <script type="text/javascript">
+    var wallet = null;
+    var tokenId = null;
+
+    function selectNft(t) {
+        t = t.closest('li')
+        document.querySelector('#sendNftButton').style.display = null;
+        tokenId = t.querySelector('img').getAttribute("tokenId");
+    }
+
+    function sendMoney() {
+        wallet = document.querySelector('#colleagueName').getAttribute("wallet")
+        var amount = document.querySelector('input#amount').value;
+        var data = new FormData();
+        data.append('publicAddresReceiver', wallet);
+        data.append('amount', amount);
+        console.log(data);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "127.0.0.1", true);
+        xhr.onload = function () {
+                // do something to response
+                console.log(this.responseText);
+            };
+            xhr.send(data);
+        }
+
+    function sendNft() {
+        wallet = document.querySelector('#colleagueName').getAttribute("wallet")
+        var data = new FormData();
+        data.append('publicAddresReceiver', wallet);
+        data.append('tokenId', tokenId);
+        console.log(wallet);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', "127.0.0.1", true);
+        xhr.onload = function () {
+                // do something to response
+                console.log(this.responseText);
+            };
+            xhr.send(data);
+        }
+
+
+    </script>
 
 
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
