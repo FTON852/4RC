@@ -9,8 +9,17 @@
     {# TODO #}
     {#  if чужой профиль  #}
     {#  отправка NFT/моент  #}
-    {% if user.user.id != request.user.id  %}
+    {% if user.user.id != request.user.id %}
+        <form method="post">
+            <h2>Отправка монет</h2>
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Отправить</button>
+        </form>
+
         <h1>отправка NFT</h1>
+
+
     {% endif %}
     <div>История</div><br>
 
