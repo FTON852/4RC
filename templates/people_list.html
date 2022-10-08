@@ -7,6 +7,8 @@
     <div>Карусель с NFT</div><br>
     <h2>Список коллег</h2>
     <div>Коллеги</div>
-
+    {% for person in people %}
+        {{ person.user.username }}
+    {% endfor %}<br>
     <a href="{% url 'main:main-page' %}">Назад</a>
 {% endblock %}
