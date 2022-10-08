@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-
+from .models import Account
 
 # Create your views here.
 @login_required
@@ -15,4 +15,7 @@ def profile(request):
 
 @login_required
 def people_list(request):
-    return render(request, 'people_list.html')
+    user_id = request.user.id
+    people = Account.objects.all()
+    return render(request, 'people_list.html', context={'people': people})
+
