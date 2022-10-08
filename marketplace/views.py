@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -10,7 +11,7 @@ from marketplace.forms import WithdrawForm
 from marketplace.models import Item
 
 
-class HomeView(FormMixin, ListView):
+class HomeView(LoginRequiredMixin, FormMixin, ListView):
     model = Item
     paginate_by = 9
     template_name = "item_list.html"
@@ -38,7 +39,7 @@ class HomeView(FormMixin, ListView):
         return super().form_valid(form)
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
     model = Item
     template_name = "product.html"
     context_object_name = 'item'
