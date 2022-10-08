@@ -1,10 +1,10 @@
 import requests
-from exceptions import FailedRequestError, BadRequestStatus
+from api.exceptions import FailedRequestError, BadRequestStatus
 from datetime import datetime as dt
 from json import JSONDecodeError
-from utils import ENDPOINT
-from helpers import convert_var_to_dict
-from utils.enum import GET, POST
+from api.utils import ENDPOINT
+from api.helpers import convert_var_to_dict
+from api.utils.enum import GET, POST
 
 
 class CoreManager:
@@ -53,7 +53,7 @@ class CoreManager:
                 status_code=response.status_code,
                 time=dt.utcnow().strftime("%H:%M:%S")
             )
-        print(res)
+        # print(res)
         return res
 
     def _prepare_request(self, method=None, url=None, query=None):
