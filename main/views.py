@@ -23,13 +23,7 @@ def profile(request, pk):
     sender = Account.objects.get(user_id=request.user.id)
     core = Core(sender.wallet.public_key, sender.wallet.secret_key)
     balance = core.balance
-    balance_nft = core.balance_nft
-    nfts = []
-    for nft in balance_nft["balance"]:
-        nfts.append({
-            "amount": len(nft["tokens"]),
-            "uri": nft["uri"]
-        })
+
     if request.method == 'POST':
         form = TransferForm(request.POST)
         if form.is_valid():
@@ -44,9 +38,9 @@ def profile(request, pk):
 
     return render(request, 'profile.html', {'user': resiever,
                                             'form': form,
-                                            'matic': balance["maticAmount"],
+                                            # 'matic': balance["maticAmount"],
                                             'ruble': balance["coinsAmount"],
-                                            'balance_nft': nfts,
+                                            # 'balance_nft': nfts,
                                             })
 
 

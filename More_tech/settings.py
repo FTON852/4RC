@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'marketplace',
     'eventfeed',
     'gamification',
+    'api_work',
 ]
 
 MIDDLEWARE = [
