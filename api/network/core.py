@@ -1,10 +1,10 @@
 import requests
-from exceptions import FailedRequestError, BadRequestStatus
+from api.exceptions import FailedRequestError, BadRequestStatus
 from datetime import datetime as dt
 from json import JSONDecodeError
-from utils import ENDPOINT
-from helpers import convert_var_to_dict
-from utils.enum import GET, POST
+from api.utils import ENDPOINT
+from api.helpers import convert_var_to_dict
+from api.utils.enum import GET, POST
 
 
 class CoreManager:
@@ -53,7 +53,7 @@ class CoreManager:
                 status_code=response.status_code,
                 time=dt.utcnow().strftime("%H:%M:%S")
             )
-        print(res)
+        # print(res)
         return res
 
     def _prepare_request(self, method=None, url=None, query=None):
@@ -61,9 +61,15 @@ class CoreManager:
 
 
 class Core(CoreManager):
-    def __init__(self, public_key="", private_key="", endpoint=ENDPOINT, timeout=5):
+    def __init__(self, public_key="",
+                 private_key="", endpoint=ENDPOINT,
+                 timeout=5):
         super().__init__(public_key=public_key, private_key=private_key, endpoint=endpoint, timeout=timeout)
-        if public_key == "" or private_key == "":
+        if not public_key == "" and private_key == "":
+            self.only_public = True
+        else:
+            self.only_public = False
+        if public_key == "" and private_key == "":
             self.public_key, self.private_key = self.new_wallet()
 
     @property
@@ -75,6 +81,8 @@ class Core(CoreManager):
         return self._balance_nft()
 
     def _prepare_request(self, method=None, url=None, query=None, public=False, auth=False):
+        if auth is True and self.only_public is True:
+            raise Exception("Add private key for use this function!")
         if query:
             if auth:
                 query["fromPrivateKey"] = self.private_key

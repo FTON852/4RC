@@ -1,0 +1,9 @@
+<h2>{{ event.title }}</h2>
+{{ event.description }}
+{{ event.reward }}
+{{ event.date_start }}
+{{ event.date_end }}
+{{ event.name }}
+<a href="{{ event.get_absolute_url }}"><img src="{{ event.image.url }}" class="card-img" alt="..." width="100"></a><br>
+
+<a href="{% url 'event_feed:event_list' %}">Назад</a>

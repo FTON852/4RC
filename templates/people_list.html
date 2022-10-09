@@ -1,0 +1,55 @@
+{#{% extends "base.html" %}#}
+{#{% block title %} Профиль {% endblock %}#}
+{##}
+{#{% block body %}#}
+{#    <h1>Баланс: 4300</h1><br>#}
+{##}
+{#    <div>Карусель с NFT</div><br>#}
+{#    <h2>Список коллег</h2>#}
+{#    <div>Коллеги</div>#}
+{#    {% for person in people %}#}
+{#        <a href="{{ person.get_absolute_url }}">{{ person.user.username }}</a>#}
+{##}
+{#    {% endfor %}<br>#}
+{#    <a href="{% url 'main:main-page' %}">Назад</a>#}
+{#{% endblock %}#}
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="row">
+        <div class="col-8">
+            <h1 style="font-size: 24px; padding-left:4rem; padding-top:1rem;">{{ request.user.username }}</h1>
+        </div>
+        <div class="col">
+            <div style="margin-top: .5rem;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+        margin-left: 3rem;">
+                <img src="{% static 'img/vtb.svg'%}" style="width: 2.5rem;
+        height: 2.5rem;
+        margin-left: 0.25rem;
+        margin-top: 0.25rem;">
+            </div>
+        </div>
+    </div>
+    <h4 style="padding-left:3rem; margin-top: 2rem;">Список коллег</h4>
+
+    <div class="row">
+        <div class="col" style="padding-left: 2rem;">
+            <ul class="colleagues">
+                {% for person in people %}
+                    <a href="{{ person.get_absolute_url }}"></a>
+                    <li>
+                        <a href="{{ person.get_absolute_url }}">
+                            <img src="{{ person.icon.url }}" style="width: 5rem; height: 5rem;border-radius: 20px;">
+                        </a>
+                        <h6 style="color: var(--bs-black); text-align: center;">{{ person.user.username }}</h6>
+                    </li>
+                {% endfor %}<br>
+
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,7 @@
+<h2>{{ item.title }}</h2>
+{{ item.description }}
+{{ item.price }}
+{{ item.name }}
+<a href="{{ item.get_absolute_url }}"><img src="{{ item.image.url }}" class="card-img" alt="..." width="100"></a><br>
+<button>Купить</button><br>
+<a href="{% url 'core:item_list' %}">Назад</a>

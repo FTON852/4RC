@@ -1,0 +1,97 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+
+
+{% block content %}
+<body style="overflow-x:hidden;">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col">
+            <div style="margin-top: 6rem;
+                                    width: 5rem;
+                                    height: 5rem;
+                                    border-radius: 50%;
+                                    background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                                    margin-left:1.5rem">
+                <img src="{% static 'img/vtb.svg' %}" style="width: 4rem;
+                                                                    height: 4rem;
+                                                                    margin-left: 0.25rem;
+                                                                    margin-top: 0.25rem;">
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
+
+
+    <h4 style="padding-left:5rem;
+    margin-top: 3rem;">Регистрация на сервисе</h4>
+
+    <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            {{ form.username }}
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            {{ form.password1 }}
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            {{ form.password2 }}
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        border-width: 0px;
+                        padding-top: .5rem;
+                        padding-bottom: .25rem;
+                        width: 12rem;">
+                        <h6 style="font-size: 1rem;
+                                    text-align: center;
+                                    color:  var(--bs-white);">Зарегистрироваться</h6>
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    </form>
+<div class="row" style="margin-left:0rem; margin-bottom: 1rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        border-width: 0px;
+                        padding-top: .5rem;
+                        padding-bottom: .25rem;
+                        width: 12rem;">
+                <a href="{{ login_url }}"><h6 style="font-size: 1rem;
+                                    text-align: center;
+                                    color:  var(--bs-white);">Авторизация</h6></a>
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+{% endblock %}
