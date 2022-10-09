@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import CreateView
 
 from .models import Account, MonthlyPay
 from api.network import Core
@@ -77,3 +78,16 @@ def all_pay(request):
         # core.send_ruble(user.wallet.public_key, mounfly_pay)
 
     return render(request, 'admin_pay.html')
+
+class AccountCreateView(CreateView):
+    model = Account
+    fields = ['user', 'group']
+    template_name = 'add_user.html'
+
+    def form_valid(self, form):
+        user = form.save()
+        account = Account.objects.get(user__username=user)
+        account.create_wallet()
+        account.save()
+
+        return redirect('main:main-page')
