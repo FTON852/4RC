@@ -2,6 +2,7 @@ import json
 
 from django.http import HttpResponse
 from api.network import Core
+from main.models import Account
 
 
 def balance(request, public_key):
