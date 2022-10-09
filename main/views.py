@@ -29,7 +29,10 @@ def profile(request, pk):
         # user_money_count = 123  # from api sender
         if amount := request.POST.get('amount'):
             amount = float(amount)
-            print(core.send_ruble(resiever.wallet.public_key, amount))
+            try:
+                print(core.send_matic(resiever.wallet.public_key, amount))
+            except Exception:
+                pass
         # elif nft := form.cleaned_data.get("nft"):
         #     print(core.send_nft(resiever.wallet.public_key, nft))
         # if money_count > user_money_count:

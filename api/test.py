@@ -11,18 +11,54 @@ if __name__ == '__main__':
 
     new_public, new_private = network.new_wallet()
 
-    transactionHash = network.send_matic(new_publicKey, 0.2)["transaction"]
-    network.check_transaction(transactionHash)
-
-    transactionHash = network.send_ruble(new_public, 0.000002)["transaction"]
-    network.check_transaction(transactionHash)
-
-    transactionHash = network.new_nft("https://i.ibb.co/WPhyscn/Image.png", 2)["transaction_hash"]
-    network.check_transaction(transactionHash)
-    network.get_nft(529)
-
-    transactionHash = network.send_nft(new_public, 1147)["transaction_hash"]
-    network.check_nft(transactionHash)
+    # transactionHash = network.send_matic(new_publicKey, 0.2)["transaction"]
+    # network.check_transaction(transactionHash)
+    #
+    # transactionHash = network.send_ruble(new_public, 0.000002)["transaction"]
+    # network.check_transaction(transactionHash)
+    #
+    # transactionHash = network.new_nft("https://i.ibb.co/WPhyscn/Image.png", 2)["transaction_hash"]
+    # network.check_transaction(transactionHash)
+    # network.get_nft(529)
+    for i in [740,
+              530,
+              531,
+              532,
+              581,
+              582,
+              585,
+              586,
+              587,
+              588,
+              589,
+              590,
+              591,
+              592,
+              721,
+              722,
+              739,
+              775,
+              776,
+              808,
+              809,
+              817,
+              818,
+              819,
+              820,
+              830,
+              831,
+              832,
+              833,
+              837,
+              838,
+              839,
+              840,
+              841,
+              842,
+              1113,
+              1114]:
+        transactionHash = network.send_nft(new_public, i)["transaction_hash"]
+        # network.check_nft(transactionHash)
 
     network.balance_nft
 
