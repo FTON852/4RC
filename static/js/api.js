@@ -27,10 +27,8 @@ fetch(`/api/transactions_history/${publicKey.value}`, {
         let nft = false;
         data = data.history;
         for (let i = 0; i < data.length; i++) {
-            if ((!data[i].hasOwnProperty('isError') || data[i].isError === "0") && data[i].tokenSymbol === "DRUB" && token === false) {
-                let value = data[i].value.toString()
-                value = value.substring(-1, value.length - 8);
-                last_transaction_value.textContent = "+" + value;
+            if ((!data[i].hasOwnProperty('isError') || data[i].isError === "0") && data[i].tokenSymbol === "MATIC" && token === false) {
+                last_transaction_value.textContent = "+" + data[i].value / 1000000000000000000;
                 token = true;
             }
             if ((!data[i].hasOwnProperty('isError') || data[i].isError === "0") && data[i].tokenSymbol === "NFT" && nft === false) {
@@ -45,7 +43,7 @@ fetch(`/api/balance/${publicKey.value}`, {
     method: 'GET',
 }).then(function (response) {
     response.json().then(function (data) {
-        balance.textContent = data.coinsAmount;
+        balance.textContent = data.maticAmount;
     });
 })
 

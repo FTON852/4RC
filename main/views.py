@@ -28,7 +28,7 @@ def profile(request, pk):
         # if form.is_valid():
         # user_money_count = 123  # from api sender
         if amount := request.POST.get('amount'):
-            amount = int(amount)
+            amount = float(amount)
             print(core.send_ruble(resiever.wallet.public_key, amount))
         # elif nft := form.cleaned_data.get("nft"):
         #     print(core.send_nft(resiever.wallet.public_key, nft))
