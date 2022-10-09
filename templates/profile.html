@@ -71,11 +71,12 @@
         {% if user.user.id != request.user.id %}
 
             <h4 style="padding-left:3rem;">Отправка монет</h4>
-
-            <div class="row" style="padding-top: 1rem; margin-left:0rem;">
-                <div class="col-3"></div>
-                <div class="col">
-                    <input type="text" name="amount" placeholder="Сумма" style="border-color: #1539F5;
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <input type="text" name="amount" placeholder="Сумма" style="border-color: #1539F5;
                         border-radius: 20px;
                         border-width: 1.5px;
                         border-style: solid;
@@ -84,47 +85,13 @@
                         text-align: center;
                         font-size: 1rem;
                         width: 12rem;">
+                    </div>
+                    <div class="col-3"></div>
                 </div>
-                <div class="col-3"></div>
-
-            </div>
-            <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
-                <div class="col-3"></div>
-                <div class="col">
-                    <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
-                        border-radius: 20px;
-                        border-width: 0px;
-                        padding-top: .5rem;
-                        padding-bottom: .25rem;
-                        width: 12rem;">
-                        <h6 style="font-size: 1rem;
-                                    text-align: center;
-                                    color:  var(--bs-white);">Отправить</h6>
-                    </button>
-                </div>
-                <div class="col-3"></div>
-            </div>
-
-            <h4 style="padding-left:3rem;">Отправка NFT</h4>
-
-            <div class="row">
-                <div class="col" style="padding-left: 2rem;">
-                    <ul class="gallery">
-                        {% for nft in balance_nft %}
-                            <li>
-                                <img src="{{ nft.uri }}" style="width: 5rem; height: 5rem;border-radius: 20px;" alt="">
-                                <h6 style="color: var(--bs-black); text-align: center;">NFT</h6>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
-            </div>
-
-            <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
-                <div class="col-3"></div>
-                <div class="col">
-                    <form method="post">
-                        <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                         border-radius: 20px;
                         border-width: 0px;
                         padding-top: .5rem;
@@ -134,10 +101,48 @@
                                     text-align: center;
                                     color:  var(--bs-white);">Отправить</h6>
                         </button>
-                    </form>
+                    </div>
+                    <div class="col-3"></div>
                 </div>
-                <div class="col-3"></div>
-            </div>
+            </form>
+
+
+            <h4 style="padding-left:3rem;">Отправка NFT</h4>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col" style="padding-left: 2rem;">
+                        <ul class="gallery" name="nft">
+                            {% for nft in balance_nft %}
+                                <li>
+                                    <img src="{{ nft.uri }}" style="width: 5rem; height: 5rem;border-radius: 20px;"
+                                         alt="">
+                                    <h6 style="color: var(--bs-black); text-align: center;">NFT</h6>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+                    <div class="col-3"></div>
+                    <div class="col">
+                        <form method="post">
+                            <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                            border-radius: 20px;
+                            border-width: 0px;
+                            padding-top: .5rem;
+                            padding-bottom: .25rem;
+                            width: 12rem;">
+                                <h6 style="font-size: 1rem;
+                                        text-align: center;
+                                        color:  var(--bs-white);">Отправить</h6>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </form>
         {% endif %}
         <div id="history">
             <h4 style="padding-left:3rem; margin-bottom: 1rem;">История</h4>
