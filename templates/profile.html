@@ -91,7 +91,7 @@
                 <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
                     <div class="col-3"></div>
                     <div class="col">
-                        <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        <button type="submit" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                         border-radius: 20px;
                         border-width: 0px;
                         padding-top: .5rem;
@@ -108,7 +108,7 @@
 
 
             <h4 style="padding-left:3rem;">Отправка NFT</h4>
-            <form action="" method="post">
+            <form method="post">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col" style="padding-left: 2rem;">
@@ -128,7 +128,7 @@
                     <div class="col-3"></div>
                     <div class="col">
                         <form method="post">
-                            <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                            <button type="submit" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                             border-radius: 20px;
                             border-width: 0px;
                             padding-top: .5rem;
@@ -183,41 +183,41 @@
             </div>
         </div>
     </div>
-     <script type="text/javascript">
-    var wallet = null;
-    var tokenId = null;
+    <script type="text/javascript">
+        var wallet = null;
+        var tokenId = null;
 
-    function selectNft(t) {
-        t = t.closest('li')
-        document.querySelector('#sendNftButton').style.display = null;
-        tokenId = t.querySelector('img').getAttribute("tokenId");
-    }
+        function selectNft(t) {
+            t = t.closest('li')
+            document.querySelector('#sendNftButton').style.display = null;
+            tokenId = t.querySelector('img').getAttribute("tokenId");
+        }
 
-    function sendMoney() {
-        wallet = document.querySelector('#colleagueName').getAttribute("wallet")
-        var amount = document.querySelector('input#amount').value;
-        var data = new FormData();
-        data.append('publicAddresReceiver', wallet);
-        data.append('amount', amount);
-        console.log(data);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', "", true);
-        xhr.onload = function () {
+        function sendMoney() {
+            wallet = document.querySelector('#colleagueName').getAttribute("wallet")
+            var amount = document.querySelector('input#amount').value;
+            var data = new FormData();
+            data.append('publicAddresReceiver', wallet);
+            data.append('amount', amount);
+            console.log(data);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', "", true);
+            xhr.onload = function () {
                 // do something to response
                 console.log(this.responseText);
             };
             xhr.send(data);
         }
 
-    function sendNft() {
-        wallet = document.querySelector('#colleagueName').getAttribute("wallet")
-        var data = new FormData();
-        data.append('publicAddresReceiver', wallet);
-        data.append('tokenId', tokenId);
-        console.log(wallet);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', "", true);
-        xhr.onload = function () {
+        function sendNft() {
+            wallet = document.querySelector('#colleagueName').getAttribute("wallet")
+            var data = new FormData();
+            data.append('publicAddresReceiver', wallet);
+            data.append('tokenId', tokenId);
+            console.log(wallet);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', "", true);
+            xhr.onload = function () {
                 // do something to response
                 console.log(this.responseText);
             };

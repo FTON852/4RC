@@ -27,11 +27,15 @@ def profile(request, pk):
         form = TransferForm(request.POST)
         if form.is_valid():
             # user_money_count = 123  # from api sender
-            money_count = int(form.cleaned_data.get("amount"))
+            if amount := form.cleaned_data.get("amount"):
+                amount = int(amount)
+                print(core.send_ruble(resiever.wallet.public_key, amount))
+            # elif nft := form.cleaned_data.get("nft"):
+            #     print(core.send_nft(resiever.wallet.public_key, nft))
             # if money_count > user_money_count:
             #     print(f"You don't have {money_count} money")
             # else:
-            print(core.send_ruble(resiever.wallet.public_key, money_count))
+
     else:
         form = TransferForm()
 
@@ -76,6 +80,7 @@ def all_pay(request):
         # core.send_ruble(user.wallet.public_key, mounfly_pay)
 
     return render(request, 'admin_pay.html')
+
 
 class AccountCreateView(CreateView):
     model = Account
