@@ -8,21 +8,7 @@
 {% block content %}
 
 
-    {#{% get_providers as socialaccount_providers %}#}
 
-    <p>
-
-
-
-    {#<form class="login" method="POST" action="{% url 'account_login' %}">#}
-    {#  {% csrf_token %}#}
-    {#  {{ form.as_p }}#}
-    {#  {% if redirect_field_value %}#}
-    {#  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />#}
-    {#  {% endif %}#}
-    {#  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>#}
-    {#  <button class="primaryAction" type="submit">{% trans "Sign In" %}</button>#}
-    {#</form>#}
     <body style="overflow-x:hidden;">
     <div class="row">
         <div class="col-4">
@@ -91,7 +77,23 @@
         </div>
         <div class="col-3"></div>
     </div>
-<a href="{{ signup_url }}">Регистрация</a></p>
+        <div class="row" style="margin-left:0rem; margin-bottom: 1rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+                        border-radius: 20px;
+                        border-width: 0px;
+                        padding-top: .5rem;
+                        padding-bottom: .25rem;
+                        width: 12rem;">
+                <a href="{{ signup_url }} "><h6 style="font-size: 1rem;
+                                    text-align: center;
+                                    color:  var(--bs-white);">Регистрация</h6></a>
+            </button>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</p>
     </form>
 
 {% endblock %}
