@@ -61,11 +61,15 @@ class CoreManager:
 
 
 class Core(CoreManager):
-    def __init__(self, public_key="0x9c6092230F9E09f3b70242B9341187d6c8B1fA01",
-                 private_key="68d03fb367f0d163bed237af3f523c5b5d6363de1d53971d5f7a35466cc72968", endpoint=ENDPOINT,
+    def __init__(self, public_key="",
+                 private_key="", endpoint=ENDPOINT,
                  timeout=5):
         super().__init__(public_key=public_key, private_key=private_key, endpoint=endpoint, timeout=timeout)
-        if public_key == "" or private_key == "":
+        if not public_key == "" and private_key == "":
+            self.only_public = True
+        else:
+            self.only_public = False
+        if public_key == "" and private_key == "":
             self.public_key, self.private_key = self.new_wallet()
 
     @property
@@ -77,6 +81,8 @@ class Core(CoreManager):
         return self._balance_nft()
 
     def _prepare_request(self, method=None, url=None, query=None, public=False, auth=False):
+        if auth is True and self.only_public is True:
+            raise Exception("Add private key for use this function!")
         if query:
             if auth:
                 query["fromPrivateKey"] = self.private_key
