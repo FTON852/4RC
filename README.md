@@ -14,8 +14,7 @@
     docker exec 4rc-vtb python manage.py initadmin
     
 #### Доступ к серверу
-    
-    - [сервер](http://localhost:8000/)
-    - [админ панель](http://localhost:8000/admin)
+    - [сервер] (http://localhost:8000/)
+    - [админ панель] (http://localhost:8000/admin)
     login: admin
     password: 123
