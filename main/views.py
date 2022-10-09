@@ -75,7 +75,7 @@ def all_pay(request):
     for user in users:
         mounfly_pay = MonthlyPay.objects.get(group=user.group)
         print(f"SEND FROM {admin_wallet[0]} TO {user.wallet.public_key} {mounfly_pay} {user.group}")
-        # core.send_ruble(user.wallet.public_key, mounfly_pay)
+        core.send_ruble(user.wallet.public_key, mounfly_pay)
 
     return render(request, 'admin_pay.html')
 

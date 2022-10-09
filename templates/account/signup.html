@@ -1,15 +1,13 @@
 {% extends "account/base.html" %}
 {% load static %}
 {% load i18n %}
-{% load account %}
 
-{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+
 
 {% block content %}
-
-
-
-    <body style="overflow-x:hidden;">
+<body style="overflow-x:hidden;">
     <div class="row">
         <div class="col-4">
         </div>
@@ -28,57 +26,56 @@
         </div>
         <div class="col-4"></div>
     </div>
+<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+  {% csrf_token %}
 
 
-    <h4 style="padding-left:7rem;
-    margin-top: 3rem;">Добро пожаловать</h4>
-    <form class="login" method="POST" action="{% url 'account_login' %}">
-    {% csrf_token %}
-    <div class="row" style="padding-top: 1rem; margin-left:0rem;">
-        <div class="col-3"></div>
-        <div class="col">
-{#            <input type="text" name="login" placeholder="Логин" style="border-color: #1539F5;#}
-{#                        border-radius: 20px;#}
-{#                        border-width: 1.5px;#}
-{#                        border-style: solid;#}
-{#                        padding-top: .25rem;#}
-{#                        padding-bottom: .25rem;#}
-{#                        text-align: center;#}
-{#                        font-size: 1rem;#}
-{#                        width: 12rem;">#}
-            {{ form.login }}
-        </div>
-
-        <div class="col-3"></div>
-
-    </div>
+    <h4 style="padding-left:5rem;
+    margin-top: 3rem;">Регистрация на сервисе</h4>
 
     <div class="row" style="padding-top: 1rem; margin-left:0rem;">
         <div class="col-3"></div>
         <div class="col">
-            {{ form.password }}
+            {{ form.username }}
         </div>
         <div class="col-3"></div>
 
     </div>
-    <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
         <div class="col-3"></div>
         <div class="col">
-            <button type="submit" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
+            {{ form.password1 }}
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            {{ form.password2 }}
+        </div>
+        <div class="col-3"></div>
+
+    </div>
+
+        <div class="row" style="padding-top: 1rem; margin-left:0rem; margin-bottom: 1rem;">
+        <div class="col-3"></div>
+        <div class="col">
+            <button type="button" name="send" style="background: linear-gradient(90deg, #1539F5 0%, #2D66C3 100%);
                         border-radius: 20px;
                         border-width: 0px;
                         padding-top: .5rem;
                         padding-bottom: .25rem;
                         width: 12rem;">
-                <h6 style="font-size: 1rem;
+                        <h6 style="font-size: 1rem;
                                     text-align: center;
-                                    color:  var(--bs-white);">Войти</h6>
+                                    color:  var(--bs-white);">Зарегистрироваться</h6>
             </button>
         </div>
         <div class="col-3"></div>
     </div>
-
-</p>
     </form>
 <div class="row" style="margin-left:0rem; margin-bottom: 1rem;">
         <div class="col-3"></div>
@@ -89,11 +86,12 @@
                         padding-top: .5rem;
                         padding-bottom: .25rem;
                         width: 12rem;">
-                <a href="{{ signup_url }} "><h6 style="font-size: 1rem;
+                <a href="{{ login_url }}"><h6 style="font-size: 1rem;
                                     text-align: center;
-                                    color:  var(--bs-white);">Регистрация</h6></a>
+                                    color:  var(--bs-white);">Авторизация</h6></a>
             </button>
         </div>
         <div class="col-3"></div>
     </div>
+
 {% endblock %}
