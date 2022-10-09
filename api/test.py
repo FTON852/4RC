@@ -6,18 +6,18 @@ new_publicKey = '0xBaD2a1448D947ED57Aa885df4Ee8f33c96A2e1D5'
 new_privateKey = '63cddfcc6bc064434a0ad47449ac85acaaa4a405ebda6b32943382aece8284fd'
 
 if __name__ == '__main__':
-    network = Core(new_publicKey, new_privateKey)
+    network = Core(publicKey, privateKey)
     network.balance
 
     new_public, new_private = network.new_wallet()
 
-    transactionHash = network.send_matic(new_public, 0.1)["transaction"]
+    transactionHash = network.send_matic(new_publicKey, 0.2)["transaction"]
     network.check_transaction(transactionHash)
 
-    transactionHash = network.send_ruble(new_public, 0.2)["transaction"]
+    transactionHash = network.send_ruble(new_public, 0.000002)["transaction"]
     network.check_transaction(transactionHash)
 
-    transactionHash = network.new_nft("htt", 2)["transaction_hash"]
+    transactionHash = network.new_nft("https://i.ibb.co/WPhyscn/Image.png", 2)["transaction_hash"]
     network.check_transaction(transactionHash)
     network.get_nft(529)
 
@@ -27,5 +27,3 @@ if __name__ == '__main__':
     network.balance_nft
 
     network.transactions_history()
-
-
