@@ -24,23 +24,23 @@ def profile(request, pk):
     sender = Account.objects.get(user_id=request.user.id)
     core = Core(sender.wallet.public_key, sender.wallet.secret_key)
     if request.method == 'POST':
-        form = TransferForm(request.POST)
-        if form.is_valid():
-            # user_money_count = 123  # from api sender
-            if amount := form.cleaned_data.get("amount"):
-                amount = int(amount)
-                print(core.send_ruble(resiever.wallet.public_key, amount))
-            # elif nft := form.cleaned_data.get("nft"):
-            #     print(core.send_nft(resiever.wallet.public_key, nft))
-            # if money_count > user_money_count:
-            #     print(f"You don't have {money_count} money")
-            # else:
+        # form = TransferForm(request.POST)
+        # if form.is_valid():
+        # user_money_count = 123  # from api sender
+        if amount := request.POST.get('amount'):
+            amount = int(amount)
+            print(core.send_ruble(resiever.wallet.public_key, amount))
+        # elif nft := form.cleaned_data.get("nft"):
+        #     print(core.send_nft(resiever.wallet.public_key, nft))
+        # if money_count > user_money_count:
+        #     print(f"You don't have {money_count} money")
+        # else:
 
     else:
         form = TransferForm()
 
     return render(request, 'profile.html', {'user': resiever,
-                                            'form': form,
+                                            # 'form': form,
                                             # 'matic': balance["maticAmount"],
                                             # 'ruble': balance["coinsAmount"],
                                             # 'balance_nft': nfts,
