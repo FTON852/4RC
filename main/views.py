@@ -71,7 +71,7 @@ def pay(request):
 
 
 def all_pay(request):
-    admin_wallet = ('public_key', 'secret_key')
+    admin_wallet = ('0x9c6092230F9E09f3b70242B9341187d6c8B1fA01', '68d03fb367f0d163bed237af3f523c5b5d6363de1d53971d5f7a35466cc72968')
     core = Core(admin_wallet[0], admin_wallet[1])
     users = Account.objects.all()
     for user in users:
