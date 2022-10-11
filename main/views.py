@@ -6,7 +6,7 @@ from django.views.generic import CreateView
 from .models import Account, MonthlyPay
 from api.network import Core
 from .forms import TransferForm
-
+from django.db.models import Q
 
 # Create your views here.
 @login_required
@@ -50,7 +50,7 @@ def profile(request, pk):
 @login_required
 def people_list(request):
     user_id = request.user.id
-    people = Account.objects.all()
+    people = Account.objects.filter(~Q(user_id=user_id))
     return render(request, 'people_list.html', context={'people': people})
 
 
